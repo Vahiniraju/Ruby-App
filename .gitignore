@@ -17,3 +17,10 @@
 /yarn-error.log
 
 .byebug_history
+.idea/.rakeTasks
+.idea/misc.xml
+.idea/modules.xml
+.idea/Trivia.iml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/inspectionProfiles/Project_Default.xml
