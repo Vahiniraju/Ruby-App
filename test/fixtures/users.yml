@@ -12,3 +12,10 @@
 #  email: MyString
 #  username: MyString
 #  password_digest: MyString
+
+jane:
+  first_name: "jane"
+  last_name: 'Doe'
+  email: "user1@example.com"
+  username: "janedoe"
+  password_digest: <%= User.digest("Password#1") %>
