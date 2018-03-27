@@ -1,0 +1,26 @@
+<div class="container form-width" id="login">
+
+  <h1 style="text-align:center"> Log In!</h1>
+
+  <%= form_for(:session, url: login_path) do |f| %>
+    <% flash.each do |messsage_type, message|   %>
+      <div class="alert alert-#{message_type}" > <%= message%> </div>
+    <%end%>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email , class: "form-control"%>
+    </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+    <%= f.label :remember_me, class: "checkbox inline" do %>
+      <%= f.check_box :remember_me %>
+      <span>Remember me on this computer</span>
+    <% end %>
+    <%= f.submit "Log in", class: "btn btn-lg btn-primary btn-block" %>
+  <% end %>
+  <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+  <%= link_to "Forgot password?", '#' %></p>
+
+</div>
