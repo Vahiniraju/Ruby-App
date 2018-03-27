@@ -6,7 +6,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_USERNAME = /\A\S{5,30}\z/
   VALID_NAME = /\A[a-zA-Z]/
-  VALID_PASSWORD = /\A[a-zA-Z][a-zA-z\d\-_@!$%&*()]{6,}/
+  VALID_PASSWORD = /\A[a-zA-Z][a-zA-z\d\-_@!#~^$%&*()]{6,}\z/
 
   #Attribute Validations
   validates :first_name, :last_name, presence: true, format:{with: VALID_NAME}
