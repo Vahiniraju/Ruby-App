@@ -19,3 +19,11 @@ jane:
   email: "user1@example.com"
   username: "janedoe"
   password_digest: <%= User.digest("Password#1") %>
+
+john:
+  first_name : "John"
+  last_name: "Dave"
+  email: "jo.dave@example.com"
+  username: "jodave"
+  password_digest: <%= User.digest("john@dave")%>
+

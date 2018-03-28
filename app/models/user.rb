@@ -13,7 +13,7 @@ class User < ApplicationRecord
   #Attribute Validations
   validates :first_name, :last_name, presence: true, format:{with: VALID_NAME}
   validates :email, presence: true, length: {maximum: 255}, format: {with: VALID_EMAIL_REGEX}, uniqueness: { case_sensitive: false}
-  validates :password, presence: true, format: {with:VALID_PASSWORD}
+  validates :password, presence: true, format: {with:VALID_PASSWORD}, allow_nil: true
   validates :username, presence: true, uniqueness: {case_sensitive: false}, format: {with: VALID_USERNAME}
 
   class << self

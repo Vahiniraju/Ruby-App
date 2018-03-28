@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+
+  before_action :valid_user, only:[:edit,:update,:show,:delete]
+  before_action :logged_in_user, only: [:edit, :update, :show,:delete]
+  before_action :user_permission, only: [:edit,:update,:show,:delete]
+
   def new
     @user = User.new
   end
@@ -18,12 +23,45 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
 
   private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name,:username,:email, :password,
                                  :password_confirmation)
+  end
+
+  def logged_in_user
+    unless logged_in?
+      remember_location
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
+  end
+
+  def user_permission
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless @user == current_user
+  end
+
+  def valid_user
+    @user = User.find_by(id: params[:id])
+    if @user.nil?
+      redirect_to root_path
+    end
   end
 
 end
