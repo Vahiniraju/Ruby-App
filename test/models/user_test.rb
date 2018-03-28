@@ -99,7 +99,11 @@ class UserTest < ActiveSupport::TestCase
   test "password should not contain space" do
     @user.password = @user.password_confirmation = " x ydsfdff$@"
     refute @user.valid?
-
   end
+
+  test "return false if user has nil as digest" do
+    assert_not @user.authenticated?('')
+  end
+
 
 end

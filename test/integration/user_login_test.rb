@@ -45,6 +45,17 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   end
 
 
+  test "check the flow with remember me" do
+    log_in_as(@user, remember_me: '1')
+    assert_not_empty cookies['remember_token']
+  end
+
+  test "check the flow with out remember me" do
+    log_in_as(@user, remember_me: '1')
+    log_in_as(@user, remember_me: '0')
+    assert_empty cookies['remember_token']
+  end
+
 
 
 
