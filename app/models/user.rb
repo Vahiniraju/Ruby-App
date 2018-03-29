@@ -1,8 +1,9 @@
 class User < ApplicationRecord
 
   has_secure_password
-
+  has_many :questions
   attr_accessor :remember_token
+  accepts_nested_attributes_for :questions
 
   #Format Validations
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
