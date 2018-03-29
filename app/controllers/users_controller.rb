@@ -37,6 +37,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    if(current_user == @user)
+      @user.destroy
+      flash[:success] = "User deleted"
+      redirect_to root_path
+    end
+
+  end
+
   private
 
   def user_params
@@ -48,13 +58,17 @@ class UsersController < ApplicationController
     unless logged_in?
       remember_location
       flash[:danger] = "Please log in."
-      redirect_to login_url
+      redirect_to login_path
     end
   end
 
   def user_permission
     @user = User.find(params[:id])
-    redirect_to(root_url) unless @user == current_user
+    if  !(@user == current_user)
+      flash[:danger] = "You are not authorized"
+      redirect_to root_path
+    end
+
   end
 
   def valid_user
