@@ -6,9 +6,9 @@ module SessionsHelper
 
   def current_user
     if (user_id = session[:user_id])
-      @current_user ||= User.find_by(id: user_id)
+      @current_user ||= User.where(id: user_id).first
     elsif (user_id = cookies.signed[:user_id])
-      user = User.find_by(id: user_id)
+      user = User.where(id: user_id).first
       if user && user.authenticated?(cookies[:remember_token])
         login user
         @current_user = user

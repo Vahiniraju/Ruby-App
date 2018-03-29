@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-  before_action :valid_user, only:[:edit,:update,:show,:delete]
-  before_action :logged_in_user, only: [:edit, :update, :show,:delete]
-  before_action :user_permission, only: [:edit,:update,:show,:delete]
+  before_action :valid_user, only:[:edit,:update,:show,:deactivate]
+  before_action :logged_in_user, only: [:edit, :update, :show,:deactivate]
+  before_action :user_permission, only: [:edit,:update,:show,:deactivate]
 
   def new
     @user = User.new
@@ -37,11 +37,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    @user = User.find(params[:id])
+  def deactivate
+
+    @user = User.where(id: params[:id]).first
     if(current_user == @user)
-      @user.destroy
-      flash[:success] = "User deleted"
+      @user.update_attributes(active: false)
+      flash[:success] = "User Deactivated!!"
+      log_out
       redirect_to root_path
     end
 
@@ -63,7 +65,7 @@ class UsersController < ApplicationController
   end
 
   def user_permission
-    @user = User.find(params[:id])
+    @user = User.where(id: params[:id]).first
     if  !(@user == current_user)
       flash[:danger] = "You are not authorized"
       redirect_to root_path
@@ -72,10 +74,12 @@ class UsersController < ApplicationController
   end
 
   def valid_user
-    @user = User.find_by(id: params[:id])
+    @user = User.where(id: params[:id]).first
     if @user.nil?
       redirect_to root_path
     end
   end
+
+
 
 end

@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
 
   def create
-    user = User.find_by(email: params[:session][:email])
+    user = User.where(email: params[:session][:email]).first
     if user && user.authenticate(params[:session][:password])
       flash[:success] = "Welcome to Trivia"
       login user
