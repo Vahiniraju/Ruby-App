@@ -12,4 +12,8 @@ class Question < ApplicationRecord
     errors.add(:base, "should have only one correct answer") if answers.select{|a| a.is_correct}.length != 1
   end
 
+  def correct_answer
+    self.answers.where(is_correct: true).first
+  end
+
 end

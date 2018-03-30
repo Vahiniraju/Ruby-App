@@ -2,6 +2,7 @@ class User < ApplicationRecord
 
   has_secure_password
   has_many :questions
+  has_many :user_selections
   attr_accessor :remember_token
   accepts_nested_attributes_for :questions
 

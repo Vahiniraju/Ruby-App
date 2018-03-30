@@ -14,6 +14,8 @@ class QuestionsController < ApplicationController
     if @question.save
       flash[:success] = "You have successfully created a Question. Want to create another?"
       redirect_to question_path
+    else
+      render 'new'
     end
   end
 

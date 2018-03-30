@@ -1,10 +1,37 @@
-<% if @user.errors.any? %>
+<% if !@user.nil?  && @user.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger">
       The form contains <%= pluralize(@user.errors.count, "error") %>.
     </div>
     <ul>
       <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if !@question.nil? && @question.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      The form contains <%= pluralize(@question.errors.count, "error") %>.
+    </div>
+    <ul>
+      <% @question.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<% if !@user_selection.nil? && @user_selection.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      The form contains <%= pluralize(@user_selection.errors.count, "error") %>.
+    </div>
+    <ul>
+      <% @user_selection.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>

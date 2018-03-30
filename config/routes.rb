@@ -10,12 +10,17 @@ Rails.application.routes.draw do
   delete '/logout', to: "sessions#destroy"
   get '/question', to: "questions#new"
   post '/question', to: "questions#create"
+  get '/user_selections', to: "user_selections#new"
+  post '/user_selections', to: "user_selections#create"
   resources :users do
     member do
       get :deactivate
     end
   end
   resources :questions
+
+
+
 
 
 end

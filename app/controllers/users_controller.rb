@@ -38,7 +38,6 @@ class UsersController < ApplicationController
   end
 
   def deactivate
-
     @user = User.where(id: params[:id]).first
     if(current_user == @user)
       @user.update_attributes(active: false)
