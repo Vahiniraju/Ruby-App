@@ -17,10 +17,6 @@ Rails.application.routes.draw do
       get :deactivate
     end
   end
-  resources :questions
-
-
-
 
 
 end

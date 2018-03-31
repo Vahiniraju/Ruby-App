@@ -3,8 +3,8 @@ require 'test_helper'
 class UsersEditTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = users(:jane)
-    @user1 = users(:john)
+    @user = create :user
+    @user1 = create :user
   end
   test "invalid user edit" do
     log_in_as(@user)

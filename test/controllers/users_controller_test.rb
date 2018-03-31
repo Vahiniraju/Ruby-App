@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
+  def setup
+    @user = create :user
+  end
   test "should get new" do
-    get signup_path
+    log_in_as(@user)
+    get user_selections_path
     assert_response :success
   end
 

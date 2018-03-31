@@ -2,6 +2,7 @@
 
 <div class="form-width">
   <%= form_for(@user_selection, url: user_selections_path, method: :post) do |f| %>
+    <%= render('shared/error_messages') %>
     <div class="form-group">
       <%= @user_selection.question.title %>
     </div>

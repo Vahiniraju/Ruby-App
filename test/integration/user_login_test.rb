@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsersLoginTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:jane)
+    @user = create :user
   end
 
   test "check login flow with invalid inuputs" do

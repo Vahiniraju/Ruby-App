@@ -13,14 +13,16 @@ class UserSelectionsController < ApplicationController
     @user_selection = current_user.user_selections.build create_params
     if @user_selection.save
       if @user_selection.correct_answer
-        flash[:success] = "You answered correctly."
+        current_user.score += 4
+        flash[:success] = "You answered correctly and score is #{@user.score}"
       else
-        flash[:danger] = "Sorry. You got the wrong answer. The correct answer is #{@user_selection.question.correct_answer.title}"
+        current_user.score -= 1 if current_user.score > 0
+        flash[:danger] = "Sorry. You got the wrong answer. The correct answer is #{@user_selection.question.correct_answer.title} and your score is #{current_user.score}"
       end
-        redirect_to user_selections_path
+      current_user.update_attributes score: current_user.score
+      redirect_to user_selections_path
     else
-        flash.now[:danger] = "Please select the answer"
-        render 'new'
+      render 'new'
     end
   end
 
@@ -29,7 +31,6 @@ class UserSelectionsController < ApplicationController
   def create_params
     params.require(:user_selection).permit(:question_id, :answer_id)
   end
-
 
   def logged_in_user
     unless logged_in?

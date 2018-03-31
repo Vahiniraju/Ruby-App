@@ -114,14 +114,6 @@ aside {
   }
 }
 
-.gravatar {
-  float: left;
-  margin-right: 10px;
-}
-
-.gravatar_edit {
-  margin-top: 15px;
-}
 
 
 /* Forms */
@@ -154,6 +146,12 @@ aside {
 #session_remember_me {
   width: auto;
   margin-left: 0;
+}
+
+
+body
+{
+  padding-bottom: 60px;
 }
 
 
