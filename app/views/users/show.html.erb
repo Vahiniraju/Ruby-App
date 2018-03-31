@@ -1,5 +1,6 @@
 <header class="jumbotron">
   <h1>Welcome  <%= @user.first_name %></h1>
+  <p> Your Score: <%= @user.score%></p>
 </header>
   <p>Want to Inactive account?<%= link_to "Inactivate account", deactivate_user_path(@user),  data: { confirm: "You sure?" } %></p>
 

@@ -18,6 +18,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: {maximum: 255}, format: {with: VALID_EMAIL_REGEX}, uniqueness: { case_sensitive: false}
   validates :password, presence: true, format: {with:VALID_PASSWORD}, allow_nil: true
   validates :username, presence: true, uniqueness: {case_sensitive: false}, format: {with: VALID_USERNAME}
+  validates :score, :numericality => { :greater_than_or_equal_to => 0 }
 
   class << self
     def digest(string)

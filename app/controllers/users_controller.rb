@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
 
   before_action :valid_user, only:[:edit,:update,:show,:deactivate]
-  before_action :logged_in_user, only: [:edit, :update, :show,:deactivate]
+  before_action :logged_in_user, only: [:edit, :update, :show,:deactivate,:index]
   before_action :user_permission, only: [:edit,:update,:show,:deactivate]
+
+  def index
+    @users = User.order("score DESC").paginate(page: params[:page])
+  end
 
   def new
     @user = User.new
@@ -48,11 +52,13 @@ class UsersController < ApplicationController
 
   end
 
+
+
   private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name,:username,:email, :password,
-                                 :password_confirmation)
+                                 :password_confirmation, :score)
   end
 
   def logged_in_user
