@@ -3,7 +3,7 @@ class UserSelection < ApplicationRecord
   belongs_to :question
   belongs_to :user
   belongs_to :answer
-  validates :question_id,:answer_id,:user_id , presence: true
+  validates :question_id, :answer_id, :user_id , presence: true
   validate :question_user_rel
   validate :question_answer_rel
   before_save :assign_correct_answer
@@ -17,6 +17,8 @@ class UserSelection < ApplicationRecord
   end
 
   def question_answer_rel
-    errors.add(:base,"Answer needs to belong to the appropriate question") unless self.question.answers.collect(&:id).include?(self.answer_id)
+    if self.answer_id &&  !self.question.answers.collect(&:id).include?(self.answer_id)
+     errors.add(:base,"Answer needs to belong to the appropriate question")
+    end
   end
 end

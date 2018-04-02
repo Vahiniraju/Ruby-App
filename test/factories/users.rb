@@ -7,6 +7,7 @@ FactoryBot.define do
     sequence(:email) {|n|"john#{n}@example.com"}
     password  "Password#1"
     password_confirmation "Password#1"
+    active true
   end
 
 end

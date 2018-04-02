@@ -9,7 +9,7 @@ module SessionsHelper
       @current_user ||= User.where(id: user_id).first
     elsif (user_id = cookies.signed[:user_id])
       user = User.where(id: user_id).first
-      if user && user.authenticated?(cookies[:remember_token])
+      if user && user.authenticated?(:remember,cookies[:remember_token]) && user.active?
         login user
         @current_user = user
       end

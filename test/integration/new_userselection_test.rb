@@ -26,7 +26,6 @@ class NewUserselectionTest < ActionDispatch::IntegrationTest
     assert_template 'user_selections/new'
     refute flash.empty?
     post user_selections_path , params: @user_selection1
-    refute flash.empty?
     assert_template 'user_selections/new'
   end
 

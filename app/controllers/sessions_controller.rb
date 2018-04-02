@@ -6,10 +6,16 @@ class SessionsController < ApplicationController
   def create
     user = User.where(email: params[:session][:email]).first
     if user && user.authenticate(params[:session][:password])
-      flash[:success] = "Welcome to Trivia"
-      login user
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_back_or user
+      if user.active?
+        flash[:success] = "Welcome to Trivia"
+        login user
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+        redirect_back_or user
+      else
+        flash[:warning] = "Account not activated. Check your email for the activation link."
+        redirect_to root_path
+      end
+
     else
       flash.now[:danger] = "Invalid email/password combination"
       render 'new'

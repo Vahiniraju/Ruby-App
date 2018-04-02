@@ -9,7 +9,10 @@ class DeactivateUserTest < ActionDispatch::IntegrationTest
   test "only logged in user can deactivate his profile" do
     get deactivate_user_path(@user)
     assert_redirected_to login_path
+    assert_template 'sessions/new'
     log_in_as(@user)
-    get deactivate_user_path(@user)
+    assert_difference "User.where(active: true).count" do
+      get deactivate_user_path(@user)
+    end
   end
 end

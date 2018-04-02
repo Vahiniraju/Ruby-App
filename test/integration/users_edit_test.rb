@@ -40,7 +40,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
   test "edit without logging in" do
     get edit_user_path(@user)
-   assert_redirected_to login_path
+    assert_redirected_to login_path
     log_in_as(@user)
     assert_redirected_to edit_user_path(@user)
     follow_redirect!
