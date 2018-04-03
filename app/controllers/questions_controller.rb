@@ -23,7 +23,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, answers_attributes:[:title])
+    params.require(:question).permit(:title,:tag_list, answers_attributes:[:title])
   end
 
   def logged_in_user

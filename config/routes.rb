@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   post '/question', to: "questions#create"
   get '/user_selections', to: "user_selections#new"
   post '/user_selections', to: "user_selections#create"
+  get 'tags/:tag', to: "user_selections#new", as: :tag
+  get '/user_selections/category', to: "user_selections#select_category"
   resources :users do
     member do
       get :deactivate

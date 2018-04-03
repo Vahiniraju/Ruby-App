@@ -4,7 +4,9 @@
   <% if logged_in? %>
     <%= link_to "Create Question!", question_path, class: "btn btn-lg btn-primary" %>
     <%= link_to "Answer Question", user_selections_path, class: "btn btn-lg btn-primary" %>
-  <% else %>
+    <%= link_to "Answer Question By Category", user_selections_category_path, class: "btn btn-lg btn-primary" %>
+
+<% else %>
     <%= link_to "Sign up!", signup_path, class: "btn btn-lg btn-primary" %>
   <%end%>
 </header>

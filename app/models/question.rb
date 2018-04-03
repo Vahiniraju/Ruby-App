@@ -5,6 +5,7 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :answers
   validates :title, presence: true
   validate :check_answers
+  acts_as_taggable
 
 
   def check_answers
