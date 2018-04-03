@@ -29,5 +29,23 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
+#en:
+#  hello: "Hello world"
+
+
+
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      question:
+        title: "Question"
+      answers:
+        title: "Answers"
+    errors:
+      models:
+        question:
+          attributes:
+            title:
+              blank: "cannot be blank"
+
+

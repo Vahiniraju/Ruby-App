@@ -26,6 +26,7 @@ gem 'uglifier', '>= 1.3.0'
 #gems for page view,
 gem 'will_paginate',           '3.1.6'
 gem 'bootstrap-will_paginate', '1.0.0'
+gem 'activerecord-reputation-system'
 #gem for jquery
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

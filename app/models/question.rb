@@ -3,6 +3,7 @@ class Question < ApplicationRecord
   belongs_to :user
   has_many :answers
   accepts_nested_attributes_for :answers
+  # validates_presence_of :title, message: 'You must provide the title of book.'
   validates :title, presence: true
   validate :check_answers
   acts_as_taggable
