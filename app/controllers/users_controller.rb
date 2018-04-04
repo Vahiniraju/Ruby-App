@@ -4,9 +4,8 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :show,:deactivate,:index]
   before_action :user_permission, only: [:edit,:update,:show,:deactivate]
 
-
   def index
-    @users = User.order("score DESC").paginate(page: params[:page])
+    @users = User.where(active: true).order("score DESC").paginate(page: params[:page])
   end
 
   def new

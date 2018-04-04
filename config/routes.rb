@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get '/index', to: 'welcome#index'
   get '/signup', to: 'users#new'
+  get '/scoreboard', to: 'users#index'
   post '/signup',  to: 'users#create'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

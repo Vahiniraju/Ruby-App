@@ -1,8 +1,6 @@
 class UserSelectionsController < ApplicationController
   before_action :logged_in_user, only: [:new,:create]
 
-
-
   def new
     if params[:tag]
       @user_selection = UserSelection.new user: current_user
