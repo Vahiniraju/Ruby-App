@@ -2,7 +2,7 @@
 <header class="jumbotron">
   <h1>Welcome To Trivia!</h1>
   <% if logged_in? %>
-    <div class="btn-group-vertical" role="group">
+    <div class="btn-group-horizontal" role="group">
     <%= link_to "Create Question!", question_path, class: "btn btn-lg btn-primary" %>
     <%= link_to "Answer Question", user_selections_path, class: "btn btn-lg btn-primary" %>
     <%= link_to "Answer Question By Category", user_selections_category_path, class: "btn btn-lg btn-primary" %>
