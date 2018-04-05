@@ -1,0 +1,52 @@
+<% if @user_selection.question %>
+
+  <div class="form-width">
+
+    <% if @user_selection.id.nil? %>
+      <%= form_for(@user_selection, url: user_selections_path, method: :post, remote: true) do |f| %>
+        <%= render('shared/error_messages') %>
+        <div class="form-group">
+          <%= @user_selection.question.title %>
+        </div>
+        <%=f.hidden_field :question_id %>
+        <div data-toggle="buttons">
+          <% @user_selection.question.answers.shuffle.each_with_index do |answer,i | %>
+            <label class="btn btn-default form-control btn-block" for="answer_<  %= i %>">
+              <input type="radio" id="answer_<%= i %>"
+                     name="user_selection[answer_id]" value="<%= answer.id %>"  autocomplete="off">
+              <%= answer.title %></label>
+            <br>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit "Submit Answer", class: "btn btn-lg btn-primary btn-block" %>
+        </div>
+      <% end %>
+
+    <% else %>
+        <div class="form-group">
+          <%= @user_selection.question.title %>
+        </div>
+        <div data-toggle="buttons">
+          <% @user_selection.question.answers.shuffle.each_with_index do |answer,i | %>
+            <% correct_answer_id = @user_selection.question.correct_answer.id %>
+            <% is_correct_answer = @user_selection.answer_id == correct_answer_id %>
+            <% color_class = correct_answer_id == answer.id ? '#15ff1c' : is_correct_answer ? '' : answer.id == @user_selection.answer_id ? '#FF2906' : '' %>
+            <label class="btn btn-default form-control btn-block" style="background-color: <%= color_class %>">
+              <%= answer.title %></label>
+            <br>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+
+  <div class="pull-right fixed-bottom">
+    <%= link_to "Next", user_selections_path ,class: "btn btn-lg btn-primary"%>
+  </div>
+
+
+<% else %>
+
+  There are no more questions available at this point.
+<% end %>

@@ -16,3 +16,10 @@
 //= require turbolinks
 //= require_tree .
 
+//When an answer is selected - add green to background color
+$(document).on('change', 'input:radio[name="user_selection[answer_id]"]', function(){
+    $('label.form-control').css('background-color', '#F7F7F7');
+    if ($(this).is(':checked')) {
+        $(this).closest('label').css('background-color', '#15ff1c');
+    }
+});

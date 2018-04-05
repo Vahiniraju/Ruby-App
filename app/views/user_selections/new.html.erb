@@ -1,35 +1,3 @@
-<% if @user_selection.question %>
-
-<div class="form-width">
-  <%= form_for(@user_selection, url: user_selections_path, method: :post) do |f| %>
-    <%= render('shared/error_messages') %>
-    <div class="form-group">
-      <%= @user_selection.question.title %>
-    </div>
-      <%=f.hidden_field :question_id %>
-      <div data-toggle="buttons">
-      <% @user_selection.question.answers.shuffle.each_with_index do |answer,i | %>
-        <label class="btn btn-default form-control btn-block" for="answer_<  %= i %>">
-          <input type="radio" id="answer_<%= i %>"
-                 name="user_selection[answer_id]" value="<%= answer.id %>"  autocomplete="off">
-          <%= answer.title %></label>
-          <br>
-      <% end %>
-
-      </div>
-
-    <div class="form-group">
-      <%= f.submit "Submit Answer", class: "btn btn-lg btn-primary btn-block" %>
-    </div>
-  <% end %>
+<div id="user_selection_answer">
+  <%= render partial: 'new'%>
 </div>
-
-  <div class="pull-right fixed-bottom">
-    <%= link_to "Next", user_selections_path ,class: "btn btn-lg btn-primary"%>
-  </div>
-
-
-<% else %>
-
-  There are no more questions available at this point.
-<% end %>
