@@ -3,9 +3,6 @@
   <h1 style="text-align:center"> Log In!</h1>
 
   <%= form_for(:session, url: login_path) do |f| %>
-    <% flash.each do |messsage_type, message|   %>
-      <div class="alert alert-#{message_type}" > <%= message%> </div>
-    <%end%>
     <div class="form-group">
       <%= f.label :email %>
       <%= f.text_field :email , class: "form-control"%>

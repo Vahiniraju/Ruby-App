@@ -32,7 +32,7 @@
           <% @user_selection.question.answers.shuffle.each_with_index do |answer,i | %>
             <% correct_answer_id = @user_selection.question.correct_answer.id %>
             <% is_correct_answer = @user_selection.answer_id == correct_answer_id %>
-            <% color_class = correct_answer_id == answer.id ? '#15ff1c' : is_correct_answer ? '' : answer.id == @user_selection.answer_id ? '#FF2906' : '' %>
+            <% color_class = correct_answer_id == answer.id ? '#5CD65C' : is_correct_answer ? '' : answer.id == @user_selection.answer_id ? '#FF4D4D' : '' %>
             <label class="btn btn-default form-control btn-block" style="background-color: <%= color_class %>">
               <%= answer.title %></label>
             <br>
@@ -41,9 +41,17 @@
     <% end %>
   </div>
 
-  <div class="pull-right fixed-bottom">
-    <%= link_to "Next", user_selections_path ,class: "btn btn-lg btn-primary"%>
-  </div>
+
+  <% if @tag %>
+    <div class="pull-right fixed-bottom">
+      <%= link_to "Next", tag_path(@tag) ,class: "btn btn-lg btn-primary"%>
+    </div>
+  <%else%>
+    <div class="pull-right fixed-bottom">
+      <%= link_to "Next", user_selections_path ,class: "btn btn-lg btn-primary"%>
+    </div>
+  <%end%>
+
 
 
 <% else %>

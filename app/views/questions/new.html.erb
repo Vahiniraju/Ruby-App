@@ -10,8 +10,9 @@
       <% options = [["General"],["Sport"],["Geography"],["Entertainment"],["Science"],["History"],["Literature"],["Language"],["Religion"],["Movies"],["Television"],["Music"]]%>
       <%= f.select :tag_list,options_for_select(options),{},class: "form-control"%>
     </div>
-    <%= f.fields_for :answers do |answer1| %>
-      <div class="form-group">
+
+    <%= f.fields_for :answers  do |answer1| %>
+      <div class="form-group", id = <%= answer1 %>>
         <%= answer1.text_field :title , class: "form-control", placeholder: answer1.object.is_correct ? 'Correct Answer' : 'Another Answer'%>
       </div>
     <% end %>

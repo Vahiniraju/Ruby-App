@@ -10,7 +10,6 @@ class PasswordResetTest < ActionDispatch::IntegrationTest
     get new_password_reset_path
     assert_template 'password_resets/new'
     post password_resets_path, params: { password_reset: { email: "" } }
-    refute flash.empty?
     assert_template 'password_resets/new'
     post password_resets_path,
          params: { password_reset: { email: @user.email } }

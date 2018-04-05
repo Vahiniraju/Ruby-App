@@ -1,7 +1,11 @@
-<% @categories.each do |tag|%>
-  <%= link_to tag, tag_path(tag.to_s) ,class: "btn btn-lg btn-primary"%>
 
+<div class="btn-group-vertical" role="group">
+<% @categories.each do |tag|%>
+
+  <%= link_to tag, tag_path(tag.to_s) ,class: "btn btn-lg btn-primary"%>
 <%end%>
+
+</div>
 
 
 

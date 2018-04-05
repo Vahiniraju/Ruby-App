@@ -2,6 +2,7 @@ FactoryBot.define do
 
   factory :question do
     title  "What color is sky?"
+    tag_list "General"
     association :user
     before(:create) do |question|
       if question.answers.length == 0

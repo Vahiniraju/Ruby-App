@@ -3,6 +3,7 @@ class UserSelectionsController < ApplicationController
 
   def new
     if params[:tag]
+      @tag = params[:tag]
       @user_selection = UserSelection.new user: current_user
       user_answered_question_ids = UserSelection.where(user_id: current_user).collect(&:question_id)
       user_created_question_ids = Question.where(user_id: current_user).collect(&:id)
@@ -23,15 +24,19 @@ class UserSelectionsController < ApplicationController
 
   def create
     @user_selection = current_user.user_selections.build create_params
-    @user_selection.save
-    if @user_selection.correct_answer
-      current_user.score += 4
-      flash[:success] = "You answered correctly and score is #{current_user.score}"
-    else
-      current_user.score -= 1 if current_user.score > 0
-      flash[:danger] = "Sorry. You got the wrong answer. The correct answer is #{@user_selection.question.correct_answer.title} and your score is #{current_user.score}"
+    if @user_selection.save
+      if @user_selection.correct_answer
+        current_user.score += 4
+        flash[:success] = "You answered correctly and score is #{current_user.score}"
+      else
+        current_user.score -= 1 if current_user.score > 0
+        flash[:danger] = "Sorry. You got the wrong answer. The correct answer is #{@user_selection.question.correct_answer.title} and your score is #{current_user.score}"
+      end
+      if ! (current_user.update_attributes score: current_user.score)
+        flash[:danger] = "something went wrong"
+      end
     end
-    current_user.update_attributes score: current_user.score
+
   end
 
   private
