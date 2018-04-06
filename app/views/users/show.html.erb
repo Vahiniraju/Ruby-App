@@ -1,6 +1,7 @@
 <header class="jumbotron">
   <h1>Welcome  <%= @user.first_name %></h1>
   <p> Your Score: <%= @user.score%></p>
+  <p> Your Streak: <%= @user.user_streak%></p>
 </header>
 <p>Click <%= link_to "here", deactivate_user_path(@user),  data: { confirm: "Are you sure, you want to inactivate?" } %> to deactivate your account</p>
 

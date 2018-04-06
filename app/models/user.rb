@@ -75,6 +75,10 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+  def self.average_score
+    (User.all.collect(&:score).sum)/(User.count)
+  end
+
   def user_streak
     if self.user_selections.length > 0
       selections = self.user_selections.order('created_at DESC')
