@@ -80,23 +80,25 @@ class User < ApplicationRecord
   end
 
   def user_streak
-    if self.user_selections.length > 0
-      selections = self.user_selections.order('created_at DESC')
-      positive_streak_count = 0
-      negative_streak_count = 0
-      selections.each do |selection|
-        if selection.correct_answer
-          if negative_streak_count > 0
-            return ("#{negative_streak_count} Incorrect in a row")
-          else
-            (positive_streak_count += 1)
-          end
+    selections = self.user_selections.order('created_at DESC')
+    return "No questions answered" if selections.empty?
+    if selections.collect(&:correct_answer).uniq.length == 1
+      return "#{selections.length} #{selections.first.correct_answer ? "Correct" : "Incorrect"} in a row"
+    end
+    positive_streak_count = 0
+    negative_streak_count = 0
+    selections.each do |selection|
+      if selection.correct_answer
+        if negative_streak_count > 0
+          return ("#{negative_streak_count} Incorrect in a row")
         else
-          if positive_streak_count > 0
-            return ("#{positive_streak_count} Correct in a row")
-          else
-            (negative_streak_count += 1)
-          end
+          (positive_streak_count += 1)
+        end
+      else
+        if positive_streak_count > 0
+          return ("#{positive_streak_count} Correct in a row")
+        else
+          (negative_streak_count += 1)
         end
       end
     end
