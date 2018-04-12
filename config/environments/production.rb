@@ -91,7 +91,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   host = 'trivia-app-durga.herokuapp.com'
-  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.default_url_options = { host: host , protocol: 'https'}
   config.action_mailer.smtp_settings = {
       address:              'smtp.gmail.com',
       port:                 587,
