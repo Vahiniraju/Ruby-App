@@ -1,21 +1,9 @@
 class UserSelectionsController < ApplicationController
+  include UserSelectionsHelper
   before_action :logged_in_user, only: [:new,:create]
 
   def new
-    if params[:tag]
-      @tag = params[:tag]
-      @user_selection = UserSelection.new user: current_user
-      user_answered_question_ids = UserSelection.where(user_id: current_user).collect(&:question_id)
-      user_created_question_ids = Question.where(user_id: current_user).collect(&:id)
-      user_selected_questions_ids = Question.where.not(id: user_answered_question_ids + user_created_question_ids)
-      @user_selection.question = user_selected_questions_ids.tagged_with(params[:tag]).sample
-    else
-      @user_selection = UserSelection.new user: current_user
-      user_answered_question_ids = UserSelection.where(user_id: current_user).collect(&:question_id)
-      user_created_question_ids = Question.where(user_id: current_user).collect(&:id)
-      @user_selection.question = Question.where.not(id: user_answered_question_ids + user_created_question_ids).sample
-    end
-
+    @user_selection = question_for_user
   end
 
   def select_category
