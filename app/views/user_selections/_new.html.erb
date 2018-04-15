@@ -9,6 +9,7 @@
           <%= @user_selection.question.title %>
         </div>
         <%=f.hidden_field :question_id %>
+        <input type="hidden" name="user_selection[tag]" value="<%= @tag %>">
         <div data-toggle="buttons">
           <% @user_selection.question.answers.shuffle.each_with_index do |answer,i | %>
             <label class="btn btn-default form-control btn-block" for="answer_<  %= i %>">

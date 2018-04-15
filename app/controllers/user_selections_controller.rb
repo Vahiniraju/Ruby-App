@@ -11,6 +11,7 @@ class UserSelectionsController < ApplicationController
   end
 
   def create
+    @tag = params[:user_selection][:tag] if params[:user_selection][:tag]
     @user_selection = current_user.user_selections.build create_params
     if @user_selection.save
       if @user_selection.correct_answer
